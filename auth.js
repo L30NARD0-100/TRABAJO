@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PawFinder – Reunite Lost Dogs</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/styles.css"/>
+<!-- Leaflet para el mapa -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- TensorFlow.js y MobileNet -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.15.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0/dist/mobilenet.min.js"></script>
+<!-- Cropper.js para recortar imágenes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<!-- Configuración de API -->
+
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer">
+      <div class="logo-icon">🐾</div>
+      PawFinder
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active" onclick="showPage('home');setActive(this)">Inicio</a>
+      <a href="#" onclick="showPage('lost');setActive(this)">Perros Perdidos</a>
+      <a href="#" onclick="showPage('found');setActive(this)">Perros Encontrados</a>
+      <a href="#" onclick="showPage('map');setActive(this)">Mapa</a>
+      <a href="#" onclick="showPage('ranking');setActive(this)">Ranking</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-primary" onclick="showPage('report')">+ Reportar Perro</button>
+      <button class="btn btn-outline" onclick="openAuthModal()">Iniciar Sesión</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGES CONTAINERS -->
+<div id="page-home" class="page active"></div>
+<div id="page-lost" class="page"></div>
+<div id="page-found" class="page"></div>
+<div id="page-detail" class="page">
+  <div id="detail-content"></div>
+</div>
+<div id="page-report" class="page"></div>
+<div id="page-ranking" class="page"></div>
+<div id="page-map" class="page"></div>
+<div id="page-account" class="page"></div>
+
+<!-- MODAL DE LOGIN -->
+<div class="modal-overlay" id="signin-modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <h2>Bienvenido de Vuelta</h2>
+    <p>Inicia sesión para reportar perros, ganar puntos y ayudar a reunir familias.</p>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="tu@email.com"/>
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" id="login-password" placeholder="Tu contraseña"/>
+    </div>
+    <button class="btn btn-primary" style="width:100%;padding:12px;font-size:.95rem;margin-top:8px" onclick="handleLogin()">Iniciar Sesión</button>
+    <div class="modal-footer">¿No tienes cuenta? <a href="#" onclick="openAuthModal()">Crea una gratis →</a></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ============================================ -->
+<!-- SCRIPTS - ORDEN CORRECTO -->
+<!-- ============================================ -->
+
+<!-- 1. AI y utilidades primero -->
+<script src="js/ai/breedClassifier.js"></script>
+<script src="js/config.js"></script>
+
+<!-- 2. Datos y utilidades -->
+<script src="js/data.js"></script>
+<script src="js/utils/helpers.js"></script>
+<script src="js/utils/ui.js"></script>
+
+<!-- 3. Autenticación (importante antes de los componentes que la usan) -->
+<script src="js/auth/users.js"></script>
+<script src="js/auth/auth.js"></script>
+
+<!-- 4. Componentes -->
+<script src="js/components/cards.js"></script>
+<script src="js/components/dogDetail.js"></script>
+<script src="js/components/map.js"></script>
+<script src="js/components/leaderboard.js"></script>
+<script src="js/components/navigation.js"></script>
+
+<!-- 5. Páginas -->
+<script src="js/pages/account.js"></script>
+<script src="js/pages/report.js"></script>
+<script src="js/pages/home.js"></script>
+<script src="js/pages/lost.js"></script>
+<script src="js/pages/found.js"></script>
+<script src="js/pages/ranking.js"></script>
+<script src="js/pages/map.js"></script>
+
+<!-- 6. Inicialización (siempre al final) -->
+<script src="js/app.js"></script>
+
+</body>
+</html>
