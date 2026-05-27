@@ -2,7 +2,7 @@ function dogCard(dog, showBtn = true) {
   const rewardBadge = dog.reward && dog.reward !== '' ? `<span class="badge badge-reward">💰 ${dog.reward}</span>` : '';
   
   // ✅ CORREGIDO: declarar typeBadge solo una vez
-  let typeBadge = '';
+  let typeBadge = '';1
   if (dog.status === 'reunited') {
     typeBadge = `<span class="badge badge-reunited">✅ REUNIDO</span>`;
   } else if (dog.type === 'lost') {
