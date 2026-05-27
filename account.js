@@ -51,5 +51,5 @@ function dogCard(dog, showBtn = true) {
       <p style="font-size:.83rem;color:var(--gray-600);margin-bottom:12px;line-height:1.5">${dogDesc.substring(0, 80)}…</p>
       ${showBtn ? btn : ''}
     </div>
-  </div>`;
+  </div>`;1
 }
